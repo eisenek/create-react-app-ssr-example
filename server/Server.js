@@ -1,14 +1,14 @@
 
 
-import _ from 'lodash';
 import express from 'express';
-import path from 'path';
+import _ from 'lodash';
 import logger from 'log4js';
-
+import path from 'path';
+import DB from './db/DB.js';
+import initEndpoints from './endpoints/index.js';
 import AppException from './exceptions/AppException.js';
 import ROOT_DIR from './root-dir.cjs';
-import initEndpoints from './endpoints/index.js';
-import DB from './db/DB.js';
+
 
 const reqLog = logger.getLogger('Request');
 
@@ -44,19 +44,19 @@ export default class Server {
 
     /**
      * Register request handler
-     * 
+     *
      * Handler is wrapped in Promise and try/catch so any failures should be handled.
      * Handlers response is used to send response to client.
-     * 
+     *
      * Handlers can resolve with String, Object or null.
      * From string response with message is created.
      * Objects are merged into default response and sent to client.
      * In case of null response handling is on handler side.
-     * 
+     *
      * ```
      * (server: Server, req: Request, res: Response) -> Promise
      * ```
-     * 
+     *
      * @param {String} method HTTP method
      * @param {String|RegExp} urlpath url path matcher
      * @param {Function} handler request handler
@@ -148,7 +148,7 @@ export default class Server {
 
     /**
      * Create new instance of server and start it
-     * @param {Config} config 
+     * @param {Config} config
      * @returns {Promise}
      */
     static start(config) {
