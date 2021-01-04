@@ -1,16 +1,21 @@
 {
-    "server": {
-        "port": { "env": "PORT", "type": "uint", "def": 8080 }
-    },
-    "db": {
-        "username": { "env": "DB_USER", "def": "weathertodo" },
-        "password": { "env": "DB_PASSWORD", "def": "" },
-        "database": { "env": "DB_NAME", "def": "WeatherTodo" },
-        "host": { "env": "DB_HOST", "def": "127.0.0.1" },
-        "port": { "env": "DB_PORT", "type": "uint", "def": 3306 },
-        "dialect": "mysql"
-    },
-    "log": {
-        "level": { "env": "LOG_LEVEL", "def": "warn" }
-    }
+  "server": {
+    "port": { "env": "PORT", "type": "uint", "def": 5000 }
+  },
+  "db": {
+    "username": { "env": "DB_USER", "def": "weathertodo" },
+    "password": { "env": "DB_PASSWORD", "def": "" },
+    "database": { "env": "DB_NAME", "def": "WeatherTodo" },
+    "host": { "env": "DB_HOST", "def": "127.0.0.1" },
+    "port": { "env": "DB_PORT", "type": "uint", "def": 3306 },
+    "dialect": "mysql"
+  },
+  "log": {
+    "level": { "env": "LOG_LEVEL", "def": "warn" }
+  },
+  "openWeatherApi": {
+    "baseUrl": "https://api.openweathermap.org/data/2.5/weather",
+    "units": "metric",
+    "apiKey": "cb5f309fa8549e021a87b1e9acbcc690"
+  }
 }
