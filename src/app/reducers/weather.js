@@ -8,7 +8,6 @@ export default (state = initialState, action) => {
 
     switch (type) {
         case WEATHER_LOADED:
-            console.log('set payload for weather loaded');
             return payload;
         default:
             return state;
