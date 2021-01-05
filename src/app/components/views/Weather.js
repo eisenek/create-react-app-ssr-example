@@ -83,7 +83,7 @@ export default function Weather() {
         if (latitude && longitude) {
             dispatch(getWeather(latitude, longitude));
         }
-    }, [location]);
+    }, [location.latitude, location.longitude]);
 
     return (
         <>{weather.length > 0 ? weather.map(item => (
