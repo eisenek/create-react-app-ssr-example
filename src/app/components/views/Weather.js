@@ -32,7 +32,7 @@ const Conditions = ({ icon, description }) => {
     const classes = useStyles();
     return (
         <Box width={1 / 1} display="flex" flexWrap="wrap" justifyContent="center">
-            <Box><img src={icon} height="64px" /></Box>
+            <Box><img src={icon} height="64px" alt={description} /></Box>
             <Typography className={classes.capitalized} variant="h6">{description}</Typography>
         </Box>
     );
@@ -83,12 +83,12 @@ export default function Weather() {
         if (latitude && longitude) {
             dispatch(getWeather(latitude, longitude));
         }
-    }, [location.latitude, location.longitude]);
+    }, [dispatch, location]);
 
     return (
         <>{weather.length > 0 ? weather.map(item => (
-            <Box key={item.id} width={1 / 3} justifyItems="center" alignItems="center">
-                <WeatherHeader key={item.id} {...item} />
+            <Box key={item.id} m={2} width={1 / 3} justifyItems="center" alignItems="center">
+                <WeatherHeader {...item} />
             </Box>
         )) : <Box m={2} width={1 / 3} alignItems="center" textAlign="center" flexWrap="wrap"><Box flexGrow={1}><CircularProgress/></Box><Box flexGrow={1}><Typography variant='h6'>{WEATHER_LOADING}</Typography></Box></Box>
         }

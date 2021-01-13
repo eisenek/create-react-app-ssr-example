@@ -1,8 +1,8 @@
 
 import path from 'path';
 import ROOT_DIR from '../root-dir.cjs';
-
 import api from './api/index.js';
+
 
 /**
  * Handles `/` request
