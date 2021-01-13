@@ -2,7 +2,7 @@ import { Box, Fab, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add.js';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listTodos } from '../../actions/todos.js';
+import { deleteTodo, listTodos } from '../../actions/todos.js';
 import Todo from '../widgets/Todo.js';
 
 const useStyles = makeStyles(theme => ({
@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getTodo(todoObject = {}) {
-    return { title: todoObject.title || '', description: todoObject.description || '', priority: todoObject.priority || 0 };
+    return { title: todoObject.title || '', description: todoObject.description || '', priority: todoObject.priority || 0, uuid: todoObject.uuid };
 }
 
 export default function Todos() {
@@ -22,11 +22,15 @@ export default function Todos() {
 
     React.useEffect(() => {
         dispatch(listTodos());
-    }, [todos, dispatch]);
+    }, [dispatch]);
+
+    React.useEffect(() => {
+        setNewTodo(false);
+    }, [todos]);
 
     return (
         <Box className={classes.spaced} width={2 / 3}>
-            {todos && todos.length > 0 && todos.map(todo => <Todo key={todos.uuid} content={getTodo(todo)} />)}
+            {todos && todos.length > 0 && todos.map(todo => <Todo key={todo.uuid} content={getTodo(todo)} onClose={() => dispatch(deleteTodo(todo.uuid))} />)}
             {newTodo && <Todo content={getTodo()} onClose={() => setNewTodo(false)} />}
             <Fab className={classes.floating} color="primary" aria-label="add" onClick={() => setNewTodo(true)} disabled={newTodo}><AddIcon /></Fab>
         </Box>

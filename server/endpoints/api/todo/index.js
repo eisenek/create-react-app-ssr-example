@@ -1,5 +1,6 @@
 
 import createHandler from './create.js';
+import deleteHandler from './delete.js';
 import editHandler from './edit.js';
 import listHandler from './list.js';
 
@@ -12,6 +13,7 @@ import listHandler from './list.js';
 export default function registerTodo(path, server) {
     server.registerHandler('get', `${path}/list`, listHandler);
     server.registerHandler('post', `${path}/create`, createHandler);
-    server.registerHandler('patch', `${path}/update`, editHandler);
+    server.registerHandler('patch', `${path}/edit/:uuid`, editHandler);
+    server.registerHandler('delete', `${path}/delete/:uuid`, deleteHandler);
 }
 

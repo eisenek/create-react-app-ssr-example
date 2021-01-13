@@ -139,6 +139,7 @@ export default class Server {
      * Installs middleware
      */
     __installMiddleware() {
+        this.express.use(express.json());
         this.express.use((req, res, next) => {
             reqLog.debug(`${req.method} ${req.path} ${req.ip}`);
             next();

@@ -8,12 +8,13 @@ import AppException from '../../../exceptions/AppException.js';
  * @property {Response} res response object
  * @returns {Promise<Object|String>}
  */
-export default async function todoCreateHandler({ db }, { body }) {
+export default async function todoCreateHandler(server, request) {
     try {
-        const todoModel = (await db.models()).Todo;
-        todoModel.create(body);
+        const todoModel = (await server.db.models()).Todo;
+        todoModel.create(request.body.data);
         return { code: 200, message: 'TODO created' };
     } catch (err) {
+        server.log.error(err);
         return AppException.rejectFromError(err);
     }
 }
