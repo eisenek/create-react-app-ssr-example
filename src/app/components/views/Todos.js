@@ -31,6 +31,7 @@ export default function Todos() {
     return (
         <Box className={classes.spaced} width={2 / 3}>
             <Typography variant={'h3'}>Things to do: </Typography>
+            {todos && todos.length === 0 && !newTodo && <Box my={2}><Typography variant="h5">No plans yet. Add a todo.</Typography></Box>}
             {todos && todos.length > 0 && todos.map(todo => <Todo key={todo.uuid} content={getTodo(todo)} onClose={() => dispatch(deleteTodo(todo.uuid))} />)}
             {newTodo && <Todo content={getTodo()} onClose={() => setNewTodo(false)} />}
             <Fab className={classes.floating} color="primary" aria-label="add" onClick={() => setNewTodo(true)} disabled={newTodo}><AddIcon /></Fab>

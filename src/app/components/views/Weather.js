@@ -19,9 +19,10 @@ const useStyles = makeStyles(() => ({
     cold: { color: colors.green[400] },
 }));
 
+const toRound = (value) => Math.round(Number(value));
+
 const Temperature = ({ value, tooltip }) => {
-    const temperatureRounded = Math.round(Number(value));
-    return <Tooltip title={tooltip}><Typography variant="h2">{temperatureRounded}°C</Typography></Tooltip>;
+    return <Tooltip title={tooltip}><Typography variant="h2">{toRound(value)}°C</Typography></Tooltip>;
 };
 
 Temperature.propTypes = {
@@ -49,7 +50,7 @@ const WeatherHeader = ({ temp, feels_like, icon, location, description, wind }) 
         <Grid container spacing={1} className={classNames(temp >= 25 ? classes.hot : classes.cold)}>
             <Grid className={classes.centered} item xs={12}><Typography variant="h4">{WEATHER_LOCATION} {location}</Typography></Grid>
             <Grid className={classes.centered} item xs={6}>
-                <Temperature value={temp} tooltip={`Feels like: ${feels_like} °C. Wind: ${wind?.speed} km/h`} />
+                <Temperature value={temp} tooltip={`Feels like: ${toRound(feels_like)}°C. Wind: ${wind?.speed} km/h`} />
             </Grid>
             <Grid item xs={6}>
                 <Conditions icon={icon} description={description}/>

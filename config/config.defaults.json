@@ -16,6 +16,6 @@
   "openWeatherApi": {
     "baseUrl": "https://api.openweathermap.org/data/2.5/weather",
     "units": "metric",
-    "apiKey": "cb5f309fa8549e021a87b1e9acbcc690"
+    "apiKey": "b1f50e030e09009af8486898d41b4b82"
   }
 }
