@@ -1,4 +1,4 @@
-import { Box, CircularProgress, colors, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, CircularProgress, colors, Grid, makeStyles, Tooltip, Typography } from '@material-ui/core';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -19,9 +19,9 @@ const useStyles = makeStyles(() => ({
     cold: { color: colors.green[400] },
 }));
 
-const Temperature = ({ value }) => {
+const Temperature = ({ value, tooltip }) => {
     const temperatureRounded = Math.round(Number(value));
-    return <Typography variant="h2">{temperatureRounded}°C</Typography>;
+    return <Tooltip title={tooltip}><Typography variant="h2">{temperatureRounded}°C</Typography></Tooltip>;
 };
 
 Temperature.propTypes = {
@@ -43,13 +43,13 @@ Conditions.propTypes = {
     description: PropTypes.string,
 };
 
-const WeatherHeader = ({ temp, icon, location, description }) => {
+const WeatherHeader = ({ temp, feels_like, icon, location, description, wind }) => {
     const classes = useStyles();
     return (
         <Grid container spacing={1} className={classNames(temp >= 25 ? classes.hot : classes.cold)}>
             <Grid className={classes.centered} item xs={12}><Typography variant="h4">{WEATHER_LOCATION} {location}</Typography></Grid>
             <Grid className={classes.centered} item xs={6}>
-                <Temperature value={temp}/>
+                <Temperature value={temp} tooltip={`Feels like: ${feels_like} °C. Wind: ${wind?.speed} km/h`} />
             </Grid>
             <Grid item xs={6}>
                 <Conditions icon={icon} description={description}/>
@@ -62,7 +62,9 @@ WeatherHeader.propTypes = {
     temp: PropTypes.number,
     icon: PropTypes.string,
     location: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    feels_like: PropTypes.number,
+    wind: PropTypes.object
 };
 
 export default function Weather() {
