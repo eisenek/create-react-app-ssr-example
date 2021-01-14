@@ -1,4 +1,4 @@
-import { Box, Fab, makeStyles } from '@material-ui/core';
+import { Box, Fab, makeStyles, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add.js';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +30,7 @@ export default function Todos() {
 
     return (
         <Box className={classes.spaced} width={2 / 3}>
+            <Typography variant={'h3'}>Things to do: </Typography>
             {todos && todos.length > 0 && todos.map(todo => <Todo key={todo.uuid} content={getTodo(todo)} onClose={() => dispatch(deleteTodo(todo.uuid))} />)}
             {newTodo && <Todo content={getTodo()} onClose={() => setNewTodo(false)} />}
             <Fab className={classes.floating} color="primary" aria-label="add" onClick={() => setNewTodo(true)} disabled={newTodo}><AddIcon /></Fab>
