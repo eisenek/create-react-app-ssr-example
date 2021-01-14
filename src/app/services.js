@@ -4,3 +4,4 @@ const createService = endpoint => axios.create({ baseURL: endpoint, headers: { C
 
 // eslint-disable-next-line import/prefer-default-export
 export const weatherService = createService('/api/weather');
+export const todoService = createService('/api/todo');
